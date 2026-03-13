@@ -5,50 +5,37 @@ namespace App\Http\Controllers;
 use App\Models\Edificio;
 use App\Http\Requests\StoreEdificioRequest;
 use App\Http\Requests\UpdateEdificioRequest;
+use Illuminate\Http\Request;
 
 class EdificioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $edificios = Edificio::with('aulas')->get();
+        return response()->json($edificios);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreEdificioRequest $request)
     {
-        //
+        $edificio = Edificio::create($request->all());
+        return response()->json($edificio, 201);
     }
 
-    /**
-     * Display the specified resource along with its aulas.
-     */
     public function show(Edificio $edificio)
     {
-        // Carga las aulas relacionadas
         $edificio->load('aulas');
-
-        // Retorna el edificio con sus aulas en JSON
         return response()->json($edificio);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateEdificioRequest $request, Edificio $edificio)
     {
-        //
+        $edificio->update($request->all());
+        return response()->json($edificio);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Edificio $edificio)
     {
-        //
+        $edificio->delete();
+        return response()->json(['message' => 'Edificio eliminado']);
     }
 }
