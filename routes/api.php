@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MobiliarioController;
+use App\Http\Controllers\EdificioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -9,18 +10,33 @@ use Illuminate\Support\Facades\Route;
 | API Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
+| Aquí registramos todas las rutas de la API.
 |
 */
 
+// Ruta de usuario autenticado (por defecto)
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('mobiliarios',[MobiliarioController::class,'index'])->name('mobiliario.index');
-Route::post('guardar', [MobiliarioController::class,'store'])->name('mobiliario.store');
-Route::get('mostrar/{mobiliario}', [ MobiliarioController::class ,'show'])->name('mobiliario.show');
-Route::put('actualizar/{mobiliario}', [ MobiliarioController::class ,'update'])->name('mobiliario.update');
-Route::delete('eliminar/{mobiliario}', [ MobiliarioController::class ,'destroy'])->name('mobiliario.destroy');
+/*
+|--------------------------------------------------------------------------
+| Rutas para Mobiliario
+|--------------------------------------------------------------------------
+*/
+Route::get('mobiliarios', [MobiliarioController::class, 'index'])->name('mobiliario.index');
+Route::post('mobiliarios', [MobiliarioController::class, 'store'])->name('mobiliario.store');
+Route::get('mobiliarios/{mobiliario}', [MobiliarioController::class, 'show'])->name('mobiliario.show');
+Route::put('mobiliarios/{mobiliario}', [MobiliarioController::class, 'update'])->name('mobiliario.update');
+Route::delete('mobiliarios/{mobiliario}', [MobiliarioController::class, 'destroy'])->name('mobiliario.destroy');
+
+/*
+|--------------------------------------------------------------------------
+| Rutas para Edificio
+|--------------------------------------------------------------------------
+*/
+Route::get('edificios', [EdificioController::class, 'index'])->name('edificio.index');
+Route::post('edificios', [EdificioController::class, 'store'])->name('edificio.store');
+Route::get('edificios/{edificio}', [EdificioController::class, 'show'])->name('edificio.show');
+Route::put('edificios/{edificio}', [EdificioController::class, 'update'])->name('edificio.update');
+Route::delete('edificios/{edificio}', [EdificioController::class, 'destroy'])->name('edificio.destroy');

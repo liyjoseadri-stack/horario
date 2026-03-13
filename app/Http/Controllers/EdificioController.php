@@ -25,11 +25,15 @@ class EdificioController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource along with its aulas.
      */
     public function show(Edificio $edificio)
     {
-        //
+        // Carga las aulas relacionadas
+        $edificio->load('aulas');
+
+        // Retorna el edificio con sus aulas en JSON
+        return response()->json($edificio);
     }
 
     /**

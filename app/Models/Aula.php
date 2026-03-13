@@ -8,5 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Aula extends Model
 {
     use HasFactory;
-    protected $fillable = ['nombre','capacidad'];
+
+    // Campos que se pueden asignar masivamente
+    protected $fillable = ['nombre','capacidad','edificio_id'];
+
+    // Relación con Edificio
+    public function edificio()
+    {
+        return $this->belongsTo(App\Models\Edificio::class);
+    }
 }
