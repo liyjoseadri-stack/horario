@@ -50,7 +50,7 @@ class EdificioController extends Controller
      */
     public function update(Request $request, Edificio $edificio)
     {
-        // Validación simple
+
         $request->validate([
             'nombre' => 'required|string|max:255'
         ]);
